@@ -9,7 +9,8 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState activationState)
     {
-		return activationState.Context.Services.GetRequiredService<MainWindow>();
+        GC.Collect(int.MaxValue, GCCollectionMode.Forced, true);
+        return activationState.Context.Services.GetRequiredService<MainWindow>();
     }
 }
 

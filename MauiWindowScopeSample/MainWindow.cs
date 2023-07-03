@@ -3,14 +3,26 @@ namespace MauiWindowScopeSample
 {
 	public class MainWindow : Window
 	{
+		private static int InstanceCount = 0;
+
 		public MainWindow(ScopedService scopedService) : base(new AppShell())
 		{
-			GC.Collect(int.MaxValue, GCCollectionMode.Forced, true);
+			InstanceCount++;
+			LogInstanceCount();
 		}
+
+        ~MainWindow()
+        {
+            InstanceCount--;
+            LogInstanceCount();
+        }
+
+        private void LogInstanceCount() => Console.WriteLine("MainWindow InstanceCount: {0}", InstanceCount);
 
         protected override void OnDestroying()
         {
             base.OnDestroying();
+            Console.WriteLine("MainWindow.OnDestroying");
         }
     }
 }
