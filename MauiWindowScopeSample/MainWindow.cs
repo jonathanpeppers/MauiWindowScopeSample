@@ -9,6 +9,7 @@ namespace MauiWindowScopeSample
 		{
 			InstanceCount++;
 			LogInstanceCount();
+			GC.Collect();
 		}
 
         ~MainWindow()
